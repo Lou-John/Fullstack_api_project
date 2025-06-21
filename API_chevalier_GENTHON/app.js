@@ -6,6 +6,7 @@ const connectDataBase = require("./services/databaseConnection");
 const userApiRoute = require("./routes/userApiRoute");
 const verifyToken = require("./middlewares/authMiddlewares");
 const app = express();
+const { swaggerUi, swaggerSpec } = require('./swagger');
 const port = 2070;
 
 //charge ficher de config
@@ -19,6 +20,9 @@ app.use(bodyParser.json());
 connectDataBase.connectDataBase();
 
 app.use("/api/user/", userApiRoute);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 
 app.set('view engine', "ejs");
