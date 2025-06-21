@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
  * /api/partenaires:
  *   get:
  *     summary: Get all partenaires
- *     tags: [Partenaire]
+ *     tags: [Partenaires]
  *     security:
  *       - bearerAuth: []
  *     responses:
@@ -27,7 +27,7 @@ const jwt = require("jsonwebtoken");
  *                 message:
  *                   type: string
  */
-module.exports.getPartenaire = (req, res) => {
+module.exports.getPartenaires = (req, res) => {
   partenaireService
     .getPartenaire()
     .then((partenaires) =>
@@ -48,7 +48,7 @@ module.exports.getPartenaire = (req, res) => {
  * /api/partenaires/{id}:
  *   get:
  *     summary: Get a partenaire by ID
- *     tags: [Partenaire]
+ *     tags: [Partenaires]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -94,7 +94,7 @@ module.exports.getPartenaire = (req, res) => {
  * /api/partenaires:
  *   post:
  *     summary: Create a new partenaire
- *     tags: [Partenaire]
+ *     tags: [Partenaires]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -141,7 +141,7 @@ module.exports.createPartenaire = async (req, res) => {
  * /api/partenaires/{id}:
  *   put:
  *     summary: Update a partenaire by ID
- *     tags: [Partenaire]
+ *     tags: [Partenaires]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -193,7 +193,7 @@ module.exports.updatePartenaire = (req, res) => {
  * /api/partenaires/{id}:
  *   delete:
  *     summary: Delete a partenaire by ID
- *     tags: [Partenaire]
+ *     tags: [Partenaires]
  *     security:
  *       - bearerAuth: []
  *     parameters:

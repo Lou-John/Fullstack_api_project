@@ -6,6 +6,8 @@ const service = require("./services/userApiService");
 const connectDataBase = require("./services/databaseConnection");
 const userApiRoute = require("./routes/userApiRoute");
 const composantRoute = require("./routes/composantRoute");
+const partenaireRoute = require("./routes/partenaireRoute");
+const configurationRoute = require("./routes/configurationRoute");
 const verifyToken = require("./middlewares/authMiddlewares");
 
 const app = express();
