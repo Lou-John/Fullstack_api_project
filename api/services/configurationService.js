@@ -46,4 +46,3 @@ module.exports.deleteConfiguration = async (query, configuration) => {
         throw Error("Error while deleting configurations");
     }
 };
-

@@ -46,4 +46,3 @@ module.exports.deleteComposant = async (query, composant) => {
         throw Error("Error while deleting composants");
     }
 };
-
