@@ -41,9 +41,26 @@ const options = {
         Configuration: {
           type: "object",
           properties: {
-            name: { type: "string" },
-            value: { type: "string" },
-            description: { type: "string" },
+            user: { type: "string", description: "User ObjectId" },
+            composants: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  composant: {
+                    type: "string",
+                    description: "Composant ObjectId",
+                  },
+                  partenaire: {
+                    type: "string",
+                    description: "Partenaire ObjectId",
+                  },
+                  prix: { type: "number" },
+                },
+              },
+            },
+            date: { type: "string", format: "date-time" },
+            total: { type: "number" },
           },
         },
         Partenaire: {

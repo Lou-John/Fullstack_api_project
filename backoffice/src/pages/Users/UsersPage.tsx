@@ -167,7 +167,7 @@ const UsersPage: React.FC = () => {
               <div>
                 <h3 className="text-xl font-semibold text-gray-900">{selectedUser.name}</h3>
                 <p className="text-gray-600">{selectedUser.email}</p>
-                <Badge variant={selectedUser.role === 'admin' ? 'primary' : 'secondary'} className="mt-2">
+                <Badge variant={selectedUser.role === 'admin' ? 'primary' : 'secondary'}>
                   {selectedUser.role === 'admin' ? 'Administrateur' : 'Utilisateur'}
                 </Badge>
               </div>

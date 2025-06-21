@@ -11,8 +11,8 @@ import { User, Partner, Configuration, Component } from "../../types";
 
 const Dashboard: React.FC = () => {
   const [components, setComponents] = useState<any[]>([]);
-  const [users, setUsers] = useState<User[]>([]);
-  const [configurations, setConfigurations] = useState<Configuration[]>([]);
+  const [users, setUsers] = useState<any[]>([]);
+  const [configurations, setConfigurations] = useState<any[]>([]);
   const [partners, setPartners] = useState<Partner[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -74,8 +74,9 @@ const Dashboard: React.FC = () => {
   ];
 
   const recentConfigurations = configurations.slice(0, 5);
+  console.log("recentConfigurations :", recentConfigurations);
 
-  const recentUsers = users.slice(0, 5);
+  const recentPartners = partners.slice(0, 5);
 
   return (
     <div className="space-y-6">
@@ -131,20 +132,24 @@ const Dashboard: React.FC = () => {
                   className="flex justify-between p-3 bg-gray-50 rounded-lg"
                 >
                   <div>
-                    <p className="font-medium text-gray-900">{config.name}</p>
+                    <p className="font-medium text-gray-900">
+                      {users.find((u) => u.id === config.user)?.username ||
+                        config.user}
+                    </p>{" "}
                     <p className="text-sm text-gray-600">
-                      {Array.isArray(config.components)
-                        ? config.components.length
+                      {Array.isArray(config.composants)
+                        ? config.composants.length
                         : 0}{" "}
                       composants
                     </p>
                   </div>
+                  
                   <div className="text-right">
                     <p className="font-semibold text-gray-900">
-                      {config.totalPrice}€
+                      {config.total}€
                     </p>
                     <p className="text-sm text-gray-600">
-                      {new Date(config.createdAt).toLocaleDateString("fr-FR")}
+                      {new Date(config.date).toLocaleDateString("fr-FR")}
                     </p>
                   </div>
                 </div>
@@ -155,33 +160,25 @@ const Dashboard: React.FC = () => {
 
         <Card className="p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            Nouveaux utilisateurs
+            Nouveaux partenaires
           </h2>
           <div className="space-y-4">
-            {recentUsers.length === 0 ? (
+            {recentPartners.length === 0 ? (
               <p className="text-gray-500">Aucune donnée</p>
             ) : (
-              recentUsers.map((user) => {
+              recentPartners.map((partner) => {
                 // Calcul dynamique du nombre de configurations pour ce user
                 const userConfigCount = configurations.filter(
-                  (config) => config.userId === user.id
+                  (config) => config.userId === partner.id
                 ).length;
                 return (
                   <div
-                    key={user.id}
+                    key={partner.id}
                     className="flex justify-between p-3 bg-gray-50 rounded-lg"
                   >
                     <div>
-                      <p className="font-medium text-gray-900">{user.name}</p>
-                      <p className="text-sm text-gray-600">{user.email}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm font-medium text-gray-900">
-                        {userConfigCount} configs
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        {new Date(user.createdAt).toLocaleDateString("fr-FR")}
-                      </p>
+                      <p className="font-medium text-gray-900">{partner.name}</p>
+                      <p className="text-sm text-gray-600">{partner.url}</p>
                     </div>
                   </div>
                 );
