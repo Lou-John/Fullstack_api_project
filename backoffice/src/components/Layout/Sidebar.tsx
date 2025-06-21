@@ -1,15 +1,15 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Cpu, 
-  Users, 
-  Settings, 
+import React from "react";
+import { NavLink } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Cpu,
+  Users,
+  Settings,
   Store,
   LogOut,
   ChevronLeft,
-  ChevronRight
-} from 'lucide-react';
+  ChevronRight,
+} from "lucide-react";
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -17,19 +17,25 @@ interface SidebarProps {
   onLogout: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, onLogout }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  isCollapsed,
+  onToggle,
+  onLogout,
+}) => {
   const navItems = [
-    { to: '/', icon: LayoutDashboard, label: 'Tableau de bord' },
-    { to: '/components', icon: Cpu, label: 'Composants' },
-    { to: '/users', icon: Users, label: 'Utilisateurs' },
-    { to: '/configurations', icon: Settings, label: 'Configurations' },
-    { to: '/partners', icon: Store, label: 'Partenaires' },
+    { to: "/", icon: LayoutDashboard, label: "Tableau de bord" },
+    { to: "/components", icon: Cpu, label: "Composants" },
+    { to: "/users", icon: Users, label: "Utilisateurs" },
+    { to: "/configurations", icon: Settings, label: "Configurations" },
+    { to: "/partners", icon: Store, label: "Partenaires" },
   ];
 
   return (
-    <div className={`bg-slate-900 text-white transition-all duration-300 flex flex-col ${
-      isCollapsed ? 'w-16' : 'w-64'
-    }`}>
+    <div
+      className={`bg-slate-900 text-white transition-all duration-300 flex flex-col ${
+        isCollapsed ? "w-20" : "w-64"
+      }`}
+    >
       <div className="p-4 flex items-center justify-between border-b border-slate-700">
         {!isCollapsed && (
           <h1 className="text-xl font-bold text-blue-400">ConfigurateurPC</h1>
@@ -51,13 +57,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, onLogout }) =>
                 className={({ isActive }) =>
                   `flex items-center space-x-3 p-3 rounded-lg transition-colors ${
                     isActive
-                      ? 'bg-blue-600 text-white'
-                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                      ? "bg-blue-600 text-white"
+                      : "text-slate-300 hover:bg-slate-800 hover:text-white"
                   }`
                 }
               >
                 <item.icon size={20} />
-                {!isCollapsed && <span>{item.label}</span>}
+                {!isCollapsed && (
+                  <span className="whitespace-nowrap">{item.label}</span>
+                )}
               </NavLink>
             </li>
           ))}

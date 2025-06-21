@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const service = require("./services/userApiService");
@@ -6,9 +7,18 @@ const connectDataBase = require("./services/databaseConnection");
 const userApiRoute = require("./routes/userApiRoute");
 const composantRoute = require("./routes/composantRoute");
 const verifyToken = require("./middlewares/authMiddlewares");
+
 const app = express();
 const { swaggerUi, swaggerSpec } = require("./swagger");
 const port = 2070;
+
+// Active CORS
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 //charge ficher de config
 dotenv.config();
@@ -48,7 +58,11 @@ app.post("/register", (req, res) => {
 
 // http://localhost:2070/
 app.get("/", (req, res) => {
-  res.send("Accueil à la zeub");
+  const page =
+    "<h2>Bienvenue sur l'API de gestion des composants</h2> \
+  <p>Pour accéder à la documentation de l'API, allez sur <a href='/api-docs'>/api-docs</a></p>";
+
+  res.send(page);
 });
 
 app.get("/home", (req, res) => {

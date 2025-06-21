@@ -1,27 +1,36 @@
-import React, { useState } from 'react';
-import { Plus, Search, Edit, Trash2, Eye, ExternalLink, TrendingUp } from 'lucide-react';
-import Card from '../../components/UI/Card';
-import Button from '../../components/UI/Button';
-import Badge from '../../components/UI/Badge';
-import Modal from '../../components/UI/Modal';
-import { Partner } from '../../types';
-import { partners } from '../../data/mockData';
+import React, { useState } from "react";
+import {
+  Plus,
+  Search,
+  Edit,
+  Trash2,
+  Eye,
+  ExternalLink,
+  TrendingUp,
+} from "lucide-react";
+import Card from "../../components/UI/Card";
+import Button from "../../components/UI/Button";
+import Badge from "../../components/UI/Badge";
+import Modal from "../../components/UI/Modal";
+import { Partner } from "../../types";
+import { partners } from "../../data/mockData";
 
 const PartnersPage: React.FC = () => {
   const [partnersList, setPartnersList] = useState<Partner[]>(partners);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
   const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
 
-  const filteredPartners = partnersList.filter(partner =>
-    partner.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    partner.url.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredPartners = partnersList.filter(
+    (partner) =>
+      partner.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      partner.url.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleDeletePartner = (id: string) => {
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer ce partenaire ?')) {
-      setPartnersList(prev => prev.filter(p => p.id !== id));
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer ce partenaire ?")) {
+      setPartnersList((prev) => prev.filter((p) => p.id !== id));
     }
   };
 
@@ -31,17 +40,24 @@ const PartnersPage: React.FC = () => {
   };
 
   const togglePartnerStatus = (id: string) => {
-    setPartnersList(prev => prev.map(partner =>
-      partner.id === id
-        ? { ...partner, status: partner.status === 'active' ? 'inactive' : 'active' }
-        : partner
-    ));
+    setPartnersList((prev) =>
+      prev.map((partner) =>
+        partner.id === id
+          ? {
+              ...partner,
+              status: partner.status === "active" ? "inactive" : "active",
+            }
+          : partner
+      )
+    );
   };
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Gestion des partenaires</h1>
+        <h1 className="text-2xl font-bold text-gray-900">
+          Gestion des partenaires
+        </h1>
         <Button onClick={() => setShowAddModal(true)}>
           <Plus size={20} className="mr-2" />
           Ajouter un partenaire
@@ -51,7 +67,10 @@ const PartnersPage: React.FC = () => {
       {/* Search */}
       <Card className="p-6">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+          <Search
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            size={20}
+          />
           <input
             type="text"
             placeholder="Rechercher un partenaire..."
@@ -85,21 +104,23 @@ const PartnersPage: React.FC = () => {
                       rel="noopener noreferrer"
                       className="hover:text-blue-600"
                     >
-                      {partner.url.replace('https://', '')}
+                      {partner.url.replace("https://", "")}
                     </a>
                   </div>
                 </div>
               </div>
               <Badge
-                variant={partner.status === 'active' ? 'success' : 'secondary'}
+                variant={partner.status === "active" ? "success" : "secondary"}
               >
-                {partner.status === 'active' ? 'Actif' : 'Inactif'}
+                {partner.status === "active" ? "Actif" : "Inactif"}
               </Badge>
             </div>
 
             <div className="space-y-3 mb-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Taux de commission</span>
+                <span className="text-sm text-gray-600">
+                  Taux de commission
+                </span>
                 <div className="flex items-center text-green-600">
                   <TrendingUp size={14} className="mr-1" />
                   <span className="font-medium">{partner.commissionRate}%</span>
@@ -108,7 +129,7 @@ const PartnersPage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">Partenaire depuis</span>
                 <span className="text-sm font-medium text-gray-900">
-                  {new Date(partner.createdAt).toLocaleDateString('fr-FR')}
+                  {new Date(partner.createdAt).toLocaleDateString("fr-FR")}
                 </span>
               </div>
             </div>
@@ -125,11 +146,11 @@ const PartnersPage: React.FC = () => {
               </Button>
               <Button
                 size="sm"
-                variant={partner.status === 'active' ? 'danger' : 'success'}
+                variant={partner.status === "active" ? "danger" : "success"}
                 onClick={() => togglePartnerStatus(partner.id)}
                 className="px-3"
               >
-                {partner.status === 'active' ? 'Désactiver' : 'Activer'}
+                {partner.status === "active" ? "Désactiver" : "Activer"}
               </Button>
               <Button size="sm" variant="secondary" className="px-3">
                 <Edit size={16} />
@@ -183,7 +204,7 @@ const PartnersPage: React.FC = () => {
               />
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -208,7 +229,7 @@ const PartnersPage: React.FC = () => {
               </select>
             </div>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               URL du logo
@@ -219,14 +240,12 @@ const PartnersPage: React.FC = () => {
               placeholder="https://example.com/logo.png"
             />
           </div>
-          
+
           <div className="flex justify-end space-x-3 pt-4">
             <Button variant="secondary" onClick={() => setShowAddModal(false)}>
               Annuler
             </Button>
-            <Button type="submit">
-              Ajouter le partenaire
-            </Button>
+            <Button type="submit">Ajouter le partenaire</Button>
           </div>
         </form>
       </Modal>
@@ -247,7 +266,9 @@ const PartnersPage: React.FC = () => {
                 className="w-16 h-16 rounded-lg object-cover"
               />
               <div>
-                <h3 className="text-xl font-semibold text-gray-900">{selectedPartner.name}</h3>
+                <h3 className="text-xl font-semibold text-gray-900">
+                  {selectedPartner.name}
+                </h3>
                 <div className="flex items-center text-gray-600 mt-1">
                   <ExternalLink size={16} className="mr-2" />
                   <a
@@ -260,47 +281,67 @@ const PartnersPage: React.FC = () => {
                   </a>
                 </div>
                 <Badge
-                  variant={selectedPartner.status === 'active' ? 'success' : 'secondary'}
-                  className="mt-2"
+                  variant={
+                    selectedPartner.status === "active"
+                      ? "success"
+                      : "secondary"
+                  }
                 >
-                  {selectedPartner.status === 'active' ? 'Actif' : 'Inactif'}
+                  {selectedPartner.status === "active" ? "Actif" : "Inactif"}
                 </Badge>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Taux de commission</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-2">
+                  Taux de commission
+                </h4>
                 <div className="flex items-center text-green-600">
                   <TrendingUp size={20} className="mr-2" />
-                  <span className="text-2xl font-bold">{selectedPartner.commissionRate}%</span>
+                  <span className="text-2xl font-bold">
+                    {selectedPartner.commissionRate}%
+                  </span>
                 </div>
               </div>
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Partenaire depuis</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-2">
+                  Partenaire depuis
+                </h4>
                 <p className="text-lg font-semibold text-gray-900">
-                  {new Date(selectedPartner.createdAt).toLocaleDateString('fr-FR', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
+                  {new Date(selectedPartner.createdAt).toLocaleDateString(
+                    "fr-FR",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  )}
                 </p>
               </div>
             </div>
 
             <div>
-              <h4 className="text-lg font-medium text-gray-900 mb-3">Statistiques</h4>
+              <h4 className="text-lg font-medium text-gray-900 mb-3">
+                Statistiques
+              </h4>
               <div className="space-y-2">
                 <div className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded">
-                  <span className="text-sm text-gray-600">Produits référencés</span>
+                  <span className="text-sm text-gray-600">
+                    Produits référencés
+                  </span>
                   <span className="text-sm font-medium">1,234</span>
                 </div>
                 <div className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded">
-                  <span className="text-sm text-gray-600">Commissions générées</span>
+                  <span className="text-sm text-gray-600">
+                    Commissions générées
+                  </span>
                   <span className="text-sm font-medium">2,456€</span>
                 </div>
                 <div className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded">
-                  <span className="text-sm text-gray-600">Dernière synchronisation</span>
+                  <span className="text-sm text-gray-600">
+                    Dernière synchronisation
+                  </span>
                   <span className="text-sm font-medium">Il y a 2 heures</span>
                 </div>
               </div>
