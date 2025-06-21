@@ -1,3 +1,4 @@
+
 const configurationService = require("../services/configurationService");
 const Configuration = require("../models/configuration");
 const jwt = require("jsonwebtoken");
@@ -7,6 +8,8 @@ module.exports.getConfigurations = (req, res) => {
   configurationService
     .getConfiguration()
     .then((configurations) =>
+
+
       res
         .status(200)
         .json({
