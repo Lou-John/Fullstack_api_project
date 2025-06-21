@@ -178,7 +178,7 @@ module.exports.login = async (req, res) => {
     const { email, password } = req.body;
     let user = await userApiService.getUser({ email: email });
     if (!user) {
-      console.log(email + "User not found");
+      console.log(email + ", User not found");
       return res
         .status(401)
         .json({ error: "Authentication failed, wrong email" });
