@@ -15,7 +15,7 @@ const options = {
       },
     ],
     components: { // <-- Add this section
-      schemas: {
+       schemas: {
         User: {
           type: 'object',
           properties: {
