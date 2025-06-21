@@ -14,8 +14,30 @@ const options = {
         url: 'http://localhost:2070',
       },
     ],
+    components: { // <-- Add this section
+      schemas: {
+        User: {
+          type: 'object',
+          properties: {
+            firstName: { type: 'string' },
+            lastName: { type: 'string' },
+            username: { type: 'string' },
+            email: { type: 'string' },
+            role: { type: 'string', enum: ['admin', 'user'] },
+            password: { type: 'string' },
+          },
+        },
+      },
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
   },
-  apis: ['./routes/*.js', './models/*.js'], // Path to the API docs
+  apis: ['./routes/*.js', './models/*.js', './controlleurs/*.js'], // Add controllers if needed
 };
 
 const swaggerSpec = swaggerJSDoc(options);

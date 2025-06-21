@@ -4,7 +4,31 @@ const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 // récupére la liste des users
-
+/**
+ * @swagger
+ * /api/user:
+ *   get:
+ *     summary: Get all users
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/User'
+ *                 message:
+ *                   type: string
+ */
 module.exports.getUsers = (req, res) => {
   userApiService
     .getUsers()
@@ -20,6 +44,36 @@ module.exports.getUsers = (req, res) => {
     );
 };
 
+/**
+ * @swagger
+ * /api/user/{id}:
+ *   get:
+ *     summary: Get a user by ID
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The user ID
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
+ *                 message:
+ *                   type: string
+ */
 module.exports.getUser = (req, res) => {
   userApiService
     .getUsers({ _id: req.params.id })
@@ -35,6 +89,33 @@ module.exports.getUser = (req, res) => {
     );
 };
 
+/**
+ * @swagger
+ * /api/user/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       201:
+ *         description: Successfully registered user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
+ *                 message:
+ *                   type: string
+ */
 module.exports.createUser = async (req, res) => {
   try {
     // crée un user d'authentification
@@ -56,6 +137,42 @@ module.exports.createUser = async (req, res) => {
   }
 };
 
+/**
+ * @swagger
+ * /api/user/login:
+ *   post:
+ *     summary: Login a user
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Successfully logged in
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                 role:
+ *                   type: string
+ *                 token:
+ *                   type: string
+ */
 module.exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -91,6 +208,42 @@ module.exports.login = async (req, res) => {
   }
 };
 
+/**
+ * @swagger
+ * /api/user/{id}:
+ *   put:
+ *     summary: Update a user by ID
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The user ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       200:
+ *         description: Successfully updated user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
+ *                 message:
+ *                   type: string
+ */
 module.exports.updateUser = (req, res) => {
   if (req.body.password) {
     req.body.password = crypto
@@ -112,7 +265,36 @@ module.exports.updateUser = (req, res) => {
       res.status(400).json({ status: 400, message: error.message })
     );
 };
-
+/**
+ * @swagger
+ * /api/user/{id}:
+ *   delete:
+ *     summary: Delete a user by ID
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The user ID
+ *     responses:
+ *       200:
+ *         description: Successfully deleted user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
+ *                 message:
+ *                   type: string
+ */
 module.exports.deleteUser = (req, res) => {
   userApiService
     .deleteUser({ _id: req.params.id })
