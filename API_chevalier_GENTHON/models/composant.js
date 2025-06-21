@@ -7,6 +7,6 @@ const composantSchema = mongoose.Schema({
   marque: { type: String},
   titre: { type: String, required: true },
   image: { type: String },
-}, {collection:'Component'});
+}, {collection:'Composant'});
 
 module.exports = mongoose.model("Composant", composantSchema);

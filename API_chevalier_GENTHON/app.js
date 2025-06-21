@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const service = require("./services/userApiService");
 const connectDataBase = require("./services/databaseConnection");
 const userApiRoute = require("./routes/userApiRoute");
+const composantRoute = require("./routes/composantRoutes");
 const verifyToken = require("./middlewares/authMiddlewares");
 const app = express();
 const { swaggerUi, swaggerSpec } = require('./swagger');
@@ -20,6 +21,8 @@ app.use(bodyParser.json());
 connectDataBase.connectDataBase();
 
 app.use("/api/user/", userApiRoute);
+
+app.use("/api/composant/", composantRoute);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
@@ -57,5 +60,5 @@ app.get('/home', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log('youpiiiii le serveur a démarré sur le port ' + port);
+    console.log('youpiiiii le serveur a démarré  ' + port);
 });

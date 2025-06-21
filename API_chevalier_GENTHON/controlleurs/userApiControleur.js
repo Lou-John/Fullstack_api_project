@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken");
 // récupére la liste des users
 
 module.exports.getUsers = (req, res) => {
-  console.log("wtf ?");
   userApiService
     .getUsers()
     .then((users) =>
