@@ -29,9 +29,9 @@ const Dashboard: React.FC = () => {
         console.log("componentsAPI.getAll() retourne :", c, u);
 
         setComponents(Array.isArray(c) ? c : [c]);
-        setUsers(Array.isArray(u) ? u : []);
-        setConfigurations(Array.isArray(cfg) ? cfg : []);
-        setPartners(Array.isArray(p) ? p : []);
+        setUsers(Array.isArray(u) ? u : [u]);
+        setConfigurations(Array.isArray(cfg) ? cfg : [cfg]);
+        setPartners(Array.isArray(p) ? p : [p]);
       } catch (error) {
         console.error("Erreur lors du chargement du dashboard :", error);
       } finally {
@@ -133,7 +133,10 @@ const Dashboard: React.FC = () => {
                   <div>
                     <p className="font-medium text-gray-900">{config.name}</p>
                     <p className="text-sm text-gray-600">
-                      {config.components.length} composants
+                      {Array.isArray(config.components)
+                        ? config.components.length
+                        : 0}{" "}
+                      composants
                     </p>
                   </div>
                   <div className="text-right">
@@ -158,25 +161,31 @@ const Dashboard: React.FC = () => {
             {recentUsers.length === 0 ? (
               <p className="text-gray-500">Aucune donnée</p>
             ) : (
-              recentUsers.map((user) => (
-                <div
-                  key={user.id}
-                  className="flex justify-between p-3 bg-gray-50 rounded-lg"
-                >
-                  <div>
-                    <p className="font-medium text-gray-900">{user.name}</p>
-                    <p className="text-sm text-gray-600">{user.email}</p>
+              recentUsers.map((user) => {
+                // Calcul dynamique du nombre de configurations pour ce user
+                const userConfigCount = configurations.filter(
+                  (config) => config.userId === user.id
+                ).length;
+                return (
+                  <div
+                    key={user.id}
+                    className="flex justify-between p-3 bg-gray-50 rounded-lg"
+                  >
+                    <div>
+                      <p className="font-medium text-gray-900">{user.name}</p>
+                      <p className="text-sm text-gray-600">{user.email}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-medium text-gray-900">
+                        {userConfigCount} configs
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {new Date(user.createdAt).toLocaleDateString("fr-FR")}
+                      </p>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-sm font-medium text-gray-900">
-                      {user.configurationsCount} configs
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      {new Date(user.createdAt).toLocaleDateString("fr-FR")}
-                    </p>
-                  </div>
-                </div>
-              ))
+                );
+              })
             )}
           </div>
         </Card>
