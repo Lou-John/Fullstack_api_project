@@ -30,8 +30,9 @@ app.use(bodyParser.json());
 connectDataBase.connectDataBase();
 
 app.use("/api/user/", userApiRoute);
-
 app.use("/api/composants/", composantRoute);
+app.use("/api/partenaires/", partenaireRoute);
+app.use("/api/configurations/", configurationRoute);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
