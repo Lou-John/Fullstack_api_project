@@ -25,7 +25,6 @@ const apiRequest = async <T>(
 
   if (!response.ok) {
     if (response.status === 401) {
-      // Token expired or invalid, redirect to login
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       window.location.href = "/login";
@@ -34,7 +33,10 @@ const apiRequest = async <T>(
     throw new Error(`API Error: ${response.status} ${response.statusText}`);
   }
 
-  return response.json();
+  const json = await response.json();
+  console.log(`[${endpoint}] >`, json);
+
+  return json?.data ?? json;
 };
 
 // Authentication API
@@ -58,20 +60,20 @@ export const authAPI = {
 
 // Components API
 export const componentsAPI = {
-  getAll: () => apiRequest<any[]>("/components"),
-  getById: (id: string) => apiRequest<any>(`/components/${id}`),
+  getAll: () => apiRequest<any[]>("/composants"),
+  getById: (id: string) => apiRequest<any>(`/composants/${id}`),
   create: (data: any) =>
-    apiRequest<any>("/components", {
+    apiRequest<any>("/composants", {
       method: "POST",
       body: JSON.stringify(data),
     }),
   update: (id: string, data: any) =>
-    apiRequest<any>(`/components/${id}`, {
+    apiRequest<any>(`/composants/${id}`, {
       method: "PUT",
       body: JSON.stringify(data),
     }),
   delete: (id: string) =>
-    apiRequest<void>(`/components/${id}`, {
+    apiRequest<void>(`/composants/${id}`, {
       method: "DELETE",
     }),
 };
@@ -98,15 +100,15 @@ export const categoriesAPI = {
 
 // Users API
 export const usersAPI = {
-  getAll: () => apiRequest<any[]>("/users"),
-  getById: (id: string) => apiRequest<any>(`/users/${id}`),
+  getAll: () => apiRequest<any[]>("/user"),
+  getById: (id: string) => apiRequest<any>(`/user/${id}`),
   update: (id: string, data: any) =>
-    apiRequest<any>(`/users/${id}`, {
+    apiRequest<any>(`/user/${id}`, {
       method: "PUT",
       body: JSON.stringify(data),
     }),
   delete: (id: string) =>
-    apiRequest<void>(`/users/${id}`, {
+    apiRequest<void>(`/user/${id}`, {
       method: "DELETE",
     }),
 };
@@ -133,20 +135,20 @@ export const configurationsAPI = {
 
 // Partners API
 export const partnersAPI = {
-  getAll: () => apiRequest<any[]>("/partners"),
-  getById: (id: string) => apiRequest<any>(`/partners/${id}`),
+  getAll: () => apiRequest<any[]>("/partenaires"),
+  getById: (id: string) => apiRequest<any>(`/partenaires/${id}`),
   create: (data: any) =>
-    apiRequest<any>("/partners", {
+    apiRequest<any>("/partenaires", {
       method: "POST",
       body: JSON.stringify(data),
     }),
   update: (id: string, data: any) =>
-    apiRequest<any>(`/partners/${id}`, {
+    apiRequest<any>(`/partenaires/${id}`, {
       method: "PUT",
       body: JSON.stringify(data),
     }),
   delete: (id: string) =>
-    apiRequest<void>(`/partners/${id}`, {
+    apiRequest<void>(`/partenaires/${id}`, {
       method: "DELETE",
     }),
 };
