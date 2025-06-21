@@ -8,10 +8,12 @@ const userApiRoute = require("./routes/userApiRoute");
 const composantRoute = require("./routes/composantRoute");
 const partenaireRoute = require("./routes/partenaireRoute");
 const configurationRoute = require("./routes/configurationRoute");
+const composantCategorieRoute = require("./routes/composantCategorieRoute");
 const verifyToken = require("./middlewares/authMiddlewares");
 
 const app = express();
 const { swaggerUi, swaggerSpec } = require("./swagger");
+const composantCategorie = require("./models/composantCategorie");
 const port = 2070;
 
 // Active CORS
@@ -35,6 +37,7 @@ app.use("/api/user/", userApiRoute);
 app.use("/api/composants/", composantRoute);
 app.use("/api/partenaires/", partenaireRoute);
 app.use("/api/configurations/", configurationRoute);
+app.use("api/composantCategories/", composantCategorieRoute);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
