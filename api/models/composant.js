@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const composantSchema = mongoose.Schema(
   {
-    categorie: { type: String, required: true },
+    categorie: { type: mongoose.Schema.Types.ObjectId, ref: "Partenaire", required: true },
     detail: { type: String, required: true },
     prix: { type: Number, required: true },
     marque: { type: String },

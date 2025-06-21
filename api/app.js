@@ -37,7 +37,7 @@ app.use("/api/user/", userApiRoute);
 app.use("/api/composants/", composantRoute);
 app.use("/api/partenaires/", partenaireRoute);
 app.use("/api/configurations/", configurationRoute);
-app.use("api/composantCategories/", composantCategorieRoute);
+app.use("/api/composantCategories/", composantCategorieRoute);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
