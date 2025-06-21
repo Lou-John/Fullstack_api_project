@@ -4,7 +4,12 @@
 
 Le site [ConfigurateurPC.com](https://configurateurpc.com) souhaite proposer une API RESTful permettant à des clients tiers de créer des applications de configuration de PC sur mesure. Cette API permet de gérer les composants matériels, les partenaires marchands, les utilisateurs et les configurations, tout en offrant une interface d’administration (BackOffice).
 
----
+## Photos du projet
+
+![image](https://github.com/user-attachments/assets/7142c016-2101-4028-b338-74b059f70dc7)
+![image](https://github.com/user-attachments/assets/64f041c7-dab4-474d-b65e-1eb138749934)
+![image](https://github.com/user-attachments/assets/af3dfaef-d667-4ba4-b6d6-78ea9b97eddf)
+
 
 ## Fonctionnalités principales
 
