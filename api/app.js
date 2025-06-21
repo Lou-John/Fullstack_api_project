@@ -31,7 +31,7 @@ connectDataBase.connectDataBase();
 
 app.use("/api/user/", userApiRoute);
 
-app.use("/api/composant/", composantRoute);
+app.use("/api/composants/", composantRoute);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
