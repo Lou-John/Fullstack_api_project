@@ -30,7 +30,7 @@ const jwt = require("jsonwebtoken");
  */
 module.exports.getConfigurations = (req, res) => {
   configurationService
-    .getConfiguration()
+    .getConfigurations()
     .then((configurations) =>
 
 

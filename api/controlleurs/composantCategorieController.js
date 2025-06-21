@@ -30,7 +30,7 @@ const jwt = require("jsonwebtoken");
  */
 module.exports.getComposantCategories = (req, res) => {
   composantCategorieService
-    .getComposantCategorie()
+    .getComposantCategories()
     .then((composantCategories) =>
 
 

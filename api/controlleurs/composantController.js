@@ -29,7 +29,7 @@ const jwt = require("jsonwebtoken");
  */
 module.exports.getComposants = (req, res) => {
   composantService
-    .getComposant()
+    .getComposants()
     .then((composants) =>
       res
         .status(200)

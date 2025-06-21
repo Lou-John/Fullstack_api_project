@@ -41,7 +41,6 @@ const options = {
         Configuration: {
           type: "object",
           properties: {
-            // Adjust these fields to match your Configuration model
             name: { type: "string" },
             value: { type: "string" },
             description: { type: "string" },
@@ -65,6 +64,14 @@ const options = {
                 },
               },
             },
+          },
+        },
+        ComposantCategorie: {
+          type: "object",
+          properties: {
+            nom: { type: "string" },
+            slug: { type: "string" },
+            description: { type: "number" },
           },
         },
       },
