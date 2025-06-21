@@ -17,7 +17,7 @@ const configurationSchema = mongoose.Schema(
     date: { type: Date, default: Date.now },
     total: { type: Number },
   },
-  { collection: "Partenaire" }
+  { collection: "Configuration" }
 );
 
 module.exports = mongoose.model("Configuration", configurationSchema);

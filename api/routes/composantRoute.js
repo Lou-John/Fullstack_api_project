@@ -9,6 +9,6 @@ router.get("", verifyToken, composantController.getComposants);
 router.get("/:id", verifyToken, composantController.getComposant);
 router.put("/:id",verifyToken, composantController.updateComposant);
 router.delete("/:id",verifyToken, composantController.deleteComposant);
-router.post("/add",verifyToken, composantController.createComposant);
+router.post("",verifyToken, composantController.createComposant);
 
 module.exports = router;

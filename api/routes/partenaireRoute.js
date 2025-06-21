@@ -9,6 +9,6 @@ router.get("", verifyToken, partenaireController.getPartenaires);
 router.get("/:id", verifyToken, partenaireController.getPartenaire);
 router.put("/:id",verifyToken, partenaireController.updatePartenaire);
 router.delete("/:id",verifyToken, partenaireController.deletePartenaire);
-router.post("/add",verifyToken, partenaireController.createPartenaire);
+router.post("",verifyToken, partenaireController.createPartenaire);
 
 module.exports = router;
