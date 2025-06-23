@@ -2,7 +2,7 @@
 
 ## Contexte
 
-Le site [ConfigurateurPC.com](https://configurateurpc.com) souhaite proposer une API RESTful permettant à des clients tiers de créer des applications de configuration de PC sur mesure. Cette API permet de gérer les composants matériels, les partenaires marchands, les utilisateurs et les configurations, tout en offrant une interface d’administration (BackOffice).
+Création d'un backoffice avec une API RESTful pour le site [ConfigurateurPC.com](https://configurateurpc.com). Cette API permet de gérer les composants matériels, les partenaires marchands, les utilisateurs et les configurations, tout en offrant une interface d’administration (BackOffice).
 
 ## Photos du projet
 
